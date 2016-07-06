@@ -31,6 +31,12 @@ function drawPaddle() {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
+  drawPaddle();
+
+  if (rightPressed && paddleX < canvas.width - paddleWidth)
+    paddleX += 7;
+  else if (leftPressed && paddleX > 0)
+    paddleX -= 7;
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius)
     dx = -dx;
   if (y + dy > canvas.height - ballRadius || y + dy < ballRadius)
@@ -40,7 +46,7 @@ function draw() {
 }
 
 document.addEventListener('keydown', keyDownHandler, false);
-document.addEventListneer('keyup', keyUpHandler, false);
+document.addEventListener('keyup', keyUpHandler, false);
 
 function keyDownHandler(e) {
   if (e.keyCode === 39)
